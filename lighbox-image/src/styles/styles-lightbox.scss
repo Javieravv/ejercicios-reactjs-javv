@@ -1,0 +1,49 @@
+@import './itemimage';
+
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: block;
+    // object-position: left right;
+    object-position: center;
+    object-fit: cover;
+}
+
+body {
+    background-color: rgba(69, 171, 196, 0.143);
+}
+
+.main {
+    width: min(98%, 1200px);
+    margin: 25px auto;
+
+    h1 {
+        font-weight: bolder;
+        font-size: clamp(1.5rem, 0.7727rem + 2.9091vw, 3.5rem);
+        margin-bottom: 15px;
+
+        &::after {
+            content: "";
+            width: 15%;
+            height: 100%;
+            display: block;
+            border: 2px solid red;
+        }
+    }
+}
+
+.list-images {
+    display: grid;
+    // grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-rows: 300px;
+    gap: 15px;
+
+}

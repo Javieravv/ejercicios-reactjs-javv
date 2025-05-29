@@ -1,0 +1,51 @@
+/* css para checkboxanimatedv1 
+Estas custom properties se configuran en el componente:
+
+--width
+--height
+--color 
+
+*/
+
+.check-container {
+    --widthInput: var(--width, 50px);
+    --heightInput: var(--height, 25px);
+    --colorInput: var(--color, green);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .input-check {
+        width: var(--widthInput);
+        height: var(--heightInput);
+        outline: 1px solid var(--colorInput);
+        border-radius: calc(var(--heightInput) / 2);
+        position: relative;
+
+        &:has(:checked)::before {
+            transform: translateX(calc(var(--widthInput) - var(--heightInput)));
+        }
+
+        &::before {
+            content: '';
+            width: var(--heightInput);
+            height: var(--heightInput);
+            border-radius: 50%;
+            background-color: var(--colorInput);
+            position: absolute;
+            transition: transform 0.25s ease-in-out;
+        }
+
+        input {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+    }
+
+
+
+}
+
+
+

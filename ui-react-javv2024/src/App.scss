@@ -1,0 +1,42 @@
+header {
+    background-color: black;
+
+    nav {
+        height: 50px;
+        color: white;
+        display: flex;
+        align-items: center;
+    }
+}
+
+
+.mainsection {
+    padding-top: 15px;
+}
+
+.checkboxes {
+    display: flex;
+    justify-content: space-around;
+}
+
+/*Clases generales*/
+
+.width-main {
+    margin: 0px auto;
+    width: min(1200px, 95%);
+}
+
+.div-input {
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+    div {
+        outline: 2px solid green;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 5px;
+    }
+}

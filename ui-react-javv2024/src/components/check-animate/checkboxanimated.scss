@@ -1,0 +1,72 @@
+$widthcontainer: 70px;
+$heightcontainer: 30px;
+$margincontainer: 10px;
+$translatecircle: calc($widthcontainer - $heightcontainer);
+
+.checkmain {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.checkcontainer {
+    width: $widthcontainer;
+    height: $heightcontainer;
+    outline: 1px solid var(--bgBorder, black);
+    border-radius: calc($heightcontainer / 2);
+    position: relative;
+    margin: $margincontainer 0;
+    overflow: hidden;
+}
+
+.check {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 10;
+}
+
+.check:checked ~ .check_circle {
+    // background-color: blue;
+    transform: translateX(0);
+}
+
+.check_circle {
+    width: $heightcontainer;
+    height: $heightcontainer;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    transform: translateX($translatecircle);
+    transition: transform 0.35s ease-in-out;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.check_circle::before {
+    content: 'ON';
+    left: calc($heightcontainer * -1 - calc($heightcontainer / 3));
+    position: absolute;
+    height: $heightcontainer;
+    width: calc($widthcontainer - $heightcontainer);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.check_circle::after {
+    content: 'OFF';
+    right: calc($heightcontainer * -1 - calc($heightcontainer / 4));
+    position: absolute;
+    height: $heightcontainer;
+    width: calc($widthcontainer - $heightcontainer);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

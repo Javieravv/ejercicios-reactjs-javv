@@ -1,0 +1,149 @@
+// Estilos para el navbar
+// Estilos para móvil y también para desktop
+$bgColorMenu: rgb(128, 0, 34);
+
+.sectionNav {
+    background-color: $bgColorMenu;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 500;
+}
+
+.navbar {
+    // Variables
+    --navheight: 60px;
+    width: min(90%, 1000px);
+    margin: 0px auto;
+    max-height: var(--navheight);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar__options {
+    background-color: $bgColorMenu;  // rgba(128, 128, 128, 0.525);
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    width: 58%;
+    // z-index: -1;
+    transform: translate(100%);
+    transition: transform 0.25s ease-in;
+    // border: 2px solid green;
+    
+    @media (min-width: 730px) {
+        position: static;
+        transform: none;
+        height: var(--navheight);
+        width: auto;
+        // background-color: transparent;
+        flex: 1;
+    }
+}
+
+.navbar__items {
+    margin-top: var(--navheight);
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100vh;
+
+    @media (min-width: 730px) {
+        flex-direction: row;
+        align-items: center;
+        margin-top: 0;
+        margin-top: 0;
+        gap: 20px;
+        height: var(--navheight);
+        justify-content: right;
+    }
+}
+
+.item__menu {
+    display: flex;
+    flex-direction: column;
+
+    .item__submenu--title {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        transition: border-botton 0.25s ease;
+        
+        &:hover {
+            border-bottom: 2px solid white;
+        }
+    }
+
+    .item__submenu--options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: height 0.85 ease-in;
+        padding: 5px 5px;
+        height: 0;
+        overflow: hidden;
+        animation: viewHight 0.05s ease-in forwards;
+        // interpolate-size: allow-keywords;
+
+        @media (min-width: 632px) {
+            position: fixed;
+            top: calc(var(--navheight) + 10px);
+            border: 1px solid white;
+            padding: 8px 10px;
+            border-radius: 5px;
+            background-color: $bgColorMenu; // 
+            box-shadow: 5px 5px 5px rgba(56, 55, 55, 0.5);
+        }
+    }
+}
+
+@keyframes viewHight {
+    from {
+        height: 0;
+    }
+    to {
+        height: auto;
+    }
+}
+
+// .item__submenu {}
+
+// Css para el menú hamburger
+.navbar__hamburger {
+    cursor: pointer;
+    z-index: 1001;
+    margin-top: 3px;
+
+    @media (min-width: 730px) {
+        display: none;
+    }
+}
+
+
+// ******************************************************************
+// Css generales
+// ******************************************************************
+
+.view-menu {
+    transform: translate(0);
+}
+
+.view-submenu {
+    border-radius: 5px;
+    padding: 3px 5px;
+    height: auto;
+    overflow: visible;
+}
+
+.turn-arrow {
+    transform: rotate(180deg);
+}
+
+svg {
+    background-color: $bgColorMenu;
+}

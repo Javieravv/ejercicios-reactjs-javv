@@ -1,0 +1,97 @@
+.image-container {
+    cursor: pointer;
+    transition: transform 0.25s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 4px 4px 5px rgba(128, 128, 128, 0.556);
+    border-radius: 10px;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &:hover .description {
+        transform: translateX(0);
+    }
+
+    .description {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        background-color: rgba(45, 6, 84, 0.153);
+        transform: translateX(100%);
+        transition: transform 0.8s ease;
+        display: flex;
+        align-items: end;
+
+        h3 {
+            color: white;
+            padding: 15px 10px;
+            font-size: 2.1rem;
+        }
+
+    }
+}
+
+.lightbox-image {
+    background: rgba(128, 128, 128, 0.891);
+    position: fixed;
+    // width: 100%;
+    // height: 100vh;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 2px solid orchid;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    place-items: center;
+    z-index: 100;
+    // transform: scale(0);
+    transition: scale 5s ease-out;
+
+    .lightbox-image__img {
+        width: min(80%, 900px);
+        height: min(90vh, 600px);
+        margin: 0 auto;
+        position: relative;
+        scale: 0.7;
+        animation: animationImg 0.4s ease-in forwards;
+
+        h3 {
+            color: white;
+            font-size: 1.75rem;
+            // align-self: self-start;
+        }
+
+        .bottonclose {
+            top: -17px;
+            right: -17px;
+            width: 35px;
+            height: 35px;
+            color: white;
+            font-weight: bold;
+            position: absolute;
+            background-color: red;
+            border-radius: 50%;
+            display: flex;
+            place-items: center;
+            place-content: center;
+            cursor: pointer;
+        }
+    }
+}
+
+@keyframes animationImg {
+    from {
+        scale: 0.7;
+        transform: rotate(-25deg);
+    }
+
+    to {
+        scale: 1;
+        transform: rotate(360deg);
+    }
+}

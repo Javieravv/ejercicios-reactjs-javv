@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  height: 100vh;
+  width: min(95%, 1200px);
+  background-color: #f0f0f0;
+  margin: 0 auto;
+}
+
+/* .divInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+} */

@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @import "react-slideshow-image/dist/styles.css"; */
+
+@layer components {
+  .card {
+    background-color: theme('colors.white');
+    border-radius: theme('borderRadius.lg');
+    padding: theme('spacing.7');
+    /* box-shadow: theme('boxShadow.xl'); */
+  }
+  .title-card {
+    color: red;
+    font-size: 1.5rem;
+  }
+  /* ... */
+}
+
+.rombo-2 {
+  width: 100px; 
+  height: 100px; 
+  border: 3px solid #555; 
+  background: #428bca;
+  -webkit-transform: rotate(45deg) skew(15deg, 15deg);
+  -moz-transform: rotate(45deg) skew(15deg, 15deg);
+  -ms-transform: rotate(45deg) skew(15deg, 15deg);
+  -o-transform: rotate(45deg) skew(15deg, 15deg);
+  transform: rotate(45deg) skew(15deg, 15deg);
+}
+
+.triangulo-1 {
+  width: 0; 
+  height: 0; 
+  border-left: 100px solid #f0ad4e;
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent; 
+}
+
+.triangulo-2 {
+     width: 0;
+     height: 0;
+     border-right:  20px solid transparent;
+     border-top:    20px solid red;
+     border-left:   20px solid transparent;
+     border-bottom: 20px solid transparent;
+}
+
+.triangulo-3::after {
+  /* content: ' ';
+  min-width: 100%;
+  min-height: 10px;
+  background-color: orange;
+  position: absolute;
+  bottom: -10px; */
+  clip-path: polygon(50% 100%, 40% 0, 60% 0);
+}

@@ -1,0 +1,89 @@
+// Estilos para el componente fecha hora
+.fechahora {
+    margin: 0 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    .fechahora_fecha, .fechahora_hora, .fechahora_botones {
+        display: flex;
+        justify-content: center;
+        min-height: 50px;
+        gap: 10px;
+
+        div {
+            width: 150px;
+            padding: 5px;
+        }
+
+        @media (width > 550px) {
+            div {
+                width: 200px;
+                min-height: 120px;
+            }
+        }
+    }
+
+    .fechahora_fecha {
+        padding-bottom: 15px;
+        border-bottom: rgba(59, 41, 255, 0.961) 3px solid;
+    }
+
+    .fechahora_fecha div, .fechahora_hora div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        gap: 15px;
+
+        p:first-child {
+            font-weight: bolder;
+            color: rgba(0, 0, 193, 0.841);
+            font-size: 1.2rem;
+        }
+
+        p:last-child {
+            font-weight: bold;
+            font-size: 3rem;
+        }
+
+        @media (width > 550px) {
+            p:first-child {
+                font-size: 1.35rem;
+            }
+
+            p:last-child {
+                font-size: 4rem;
+            }
+        }
+    }
+
+    .fechahora_botones {
+        display: flex;
+        flex-direction: column;
+
+        button {
+            border: none;
+            background-color: rgba(0, 0, 255, 0.841);
+            color: white;
+            font-size: 1.2rem;
+            padding: 15px 0;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.25s ease;
+
+            &:hover {
+                background-color: rgba(0, 110, 255, 0.841);
+
+            }
+        }
+
+        @media (width > 550px) {
+            flex-direction: row;
+
+            button {
+                width: 200px;
+            }
+        }
+    }
+}
