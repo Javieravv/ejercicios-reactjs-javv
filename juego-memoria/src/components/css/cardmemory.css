@@ -1,0 +1,28 @@
+/* Css para el componente CardMemory */
+
+.card-memory {
+    /* width:  120px;     */
+    height: 120px;
+    outline: 2px solid var(--color-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+} 
+
+.card-memory:hover {
+    background-color: var(--color-primary);
+    opacity: 0.8;
+}
+
+.card-memory:hover p {
+    color: white;
+    font-weight: bold;
+}
+
+.card-memory p {
+    font-size: 3rem;
+    color: var(--color-text-main);
+}

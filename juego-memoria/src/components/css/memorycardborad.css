@@ -1,0 +1,8 @@
+/* Css para el memory card */
+.memory-cardboard {
+    margin-top: 15px;
+    display: grid;
+    gap: 8px 10px;
+    /* grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr); */
+} 
