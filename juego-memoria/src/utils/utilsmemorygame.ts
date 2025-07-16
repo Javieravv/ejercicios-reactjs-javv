@@ -1,3 +1,5 @@
+import type { itemOptionMemory } from "../App";
+
 // Devuelve la combinación más alta de dos números que multiplicados den n
 export const obtenerCombinacionEquilibrada = (n: number): [number, number] | null => {
     let mejor: [number, number] | null = null;
@@ -22,21 +24,24 @@ export const obtenerCombinacionEquilibrada = (n: number): [number, number] | nul
 // valores de otro arreglo.
 // Los valores del arreglo1 se colocan dos veces en el arreglo 2
 
-export const initStateMemoryGame = (arrayData: string[]): string[] => {
-    const arrayDataMemoryGame: string[] = Array(arrayData.length * 2).fill('')
-    let totOptions = arrayDataMemoryGame.length
+export const initStateMemoryGame = (arrayData: itemOptionMemory[]): itemOptionMemory[] => {
+    const arrayDataMemoryGame: itemOptionMemory[] = Array(arrayData.length * 2)
+        .fill(null)
+        .map(() => ({ text: '', isSelected: false, isCardPaired: false }));
 
+    let totOptions = arrayDataMemoryGame.length
     for (let j = 0; j < arrayData.length; j++) {
         let totApariciones = 1
         while (totApariciones <= 2) {
             const indexOption = Math.floor(Math.random() * totOptions)
             let cont = 0 // Cuenta las casillas vacías
             for (let i = 0; i < arrayDataMemoryGame.length; i++) {
-                if (arrayDataMemoryGame[i] === '' && cont !== indexOption) {
+                if (arrayDataMemoryGame[i].text === '' && cont !== indexOption) {
                     cont = cont + 1
                 }
-                if (arrayDataMemoryGame[i] === '' && cont === indexOption) {
-                    arrayDataMemoryGame[i] = arrayData[j]
+                if (arrayDataMemoryGame[i].text === '' && cont === indexOption) {
+                    arrayDataMemoryGame[i].text = arrayData[j].text
+                    arrayDataMemoryGame[i].isSelected = false
                     totOptions = totOptions - 1
                     break
                 }
@@ -44,7 +49,5 @@ export const initStateMemoryGame = (arrayData: string[]): string[] => {
             totApariciones = totApariciones + 1
         }
     }
-
-
     return arrayDataMemoryGame
 }

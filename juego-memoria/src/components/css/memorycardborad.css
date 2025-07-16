@@ -1,4 +1,26 @@
 /* Css para el memory card */
+div h3 {
+    font-size: 2rem;
+    display: block;
+    color: var(--color-primary);
+}
+
+div h3:last-child {
+    font-weight: bolder;
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+}
+
+.memory-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .memory-cardboard {
     margin-top: 15px;
     display: grid;
@@ -6,3 +28,64 @@
     /* grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr); */
 } 
+
+.memory-results {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+}
+
+.memory-results div {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.memory-btns {
+    /* outline: 1px solid orangered; */
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.memory-btns button {
+    border: none;
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius);
+    color: var(--color-text-main);
+    flex: 1;
+    cursor: pointer;
+    height: 100%;
+}
+
+.memory-btns button:hover {
+    background-color: var(--color-secondary);
+}
+
+.memory-btns button:disabled {
+    background-color: var(--color-border);
+    cursor: grabbing;
+}
+
+.memory-endgame {
+    display: flex;
+    justify-content: center;
+}
+
+/* Css para el cronómetro del juego */
+.watch-container {
+    height: 100%;
+    display: flex;
+    gap: 5px;
+}
+
+.watch-container div:first-child {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.watch-container div:last-child {
+    display: flex;
+    justify-content: flex-start;
+}

@@ -1,26 +1,52 @@
 /* Css para el componente CardMemory */
+:root {
+    --top-position-hidem: 100%;
+    --top-position-visible: 0;
+}
 
-.card-memory {
+.cardmemory-container {
     /* width:  120px;     */
     height: 120px;
     outline: 2px solid var(--color-primary);
+    position: relative;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.card-memory {
     display: flex;
+    height: 100%;
+    width: 100%;
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-} 
+    transition: transform 0.45s ease;
+}
+
+.card-memory_hidem {
+    position: absolute;
+    transform: translateY(-100%);
+}
+
+.card-memory_visible {
+    position: absolute;
+    transform: translateY(0%);
+}
+
+.card-memory_found {
+    background-color: var(--color-primary);
+}
 
 .card-memory:hover {
-    background-color: var(--color-primary);
-    opacity: 0.8;
+    /* background-color: var(--color-primary);
+    opacity: 0.8; */
 }
 
-.card-memory:hover p {
+/* .card-memory:hover p {
     color: white;
     font-weight: bold;
-}
+} */
 
 .card-memory p {
     font-size: 3rem;
