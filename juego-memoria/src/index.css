@@ -19,7 +19,7 @@
   #root {
     /* border: 1px solid var(--color-error); */
     /* outline: 2px solid var(--color-error); */
-    width: min(98%, 900px);
+    width: min(95%, 900px);
     margin: 0 auto;
   }
 

@@ -6,6 +6,7 @@ interface StopwatchProps {
     stopgame: boolean;
     timeGameSeconds: number;
     timeGameMinutes: number;
+    startWatch?: boolean;
     setTimeGameSeconds: Dispatch<SetStateAction<number>>;
     setTimeGameMinutes: Dispatch<SetStateAction<number>>;
 }
@@ -14,11 +15,13 @@ const Stopwatch = ({
     stopgame,
     timeGameSeconds,
     timeGameMinutes,
+    startWatch = false,
     setTimeGameSeconds,
     setTimeGameMinutes }: StopwatchProps) => {
 
     useEffect(() => {
         if (stopgame) return
+        if (startWatch) return
 
         const intervalIdSeconds = setInterval(() => {
             setTimeGameSeconds(prev => prev > 59 ? 1 : prev + 1)
@@ -32,7 +35,7 @@ const Stopwatch = ({
             clearInterval(intervalIdSeconds)
             clearInterval(intervalIdMinutes)
         }
-    }, [setTimeGameMinutes, setTimeGameSeconds, stopgame])
+    }, [setTimeGameMinutes, setTimeGameSeconds, stopgame, startWatch])
 
     return (
         <div

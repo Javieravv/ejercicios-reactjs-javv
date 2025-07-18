@@ -1,0 +1,72 @@
+/* Css para los resultados del juego */
+
+.memory-results {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.memory-results div {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* outline: 2px solid yellow; */
+    /* min-height: 50px; */
+}
+
+.memory-totals {
+}
+
+.memory-totals div h3 {
+    font-size: clamp(2rem, 3vw, 4rem);
+    display: block;
+    color: var(--color-primary);
+}
+
+.memory-totals h3:last-child {
+    font-weight: bolder;
+    font-size: clamp(2rem, 3vw, 4rem);
+}
+
+
+.memory-btns {
+    /* outline: 1px solid orangered; */
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    /* outline: 2px solid maroon; */
+    min-height: 50px
+}
+
+.memory-btns button {
+    border: none;
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius);
+    color: var(--color-text-main);
+    flex: 1;
+    cursor: pointer;
+    height: 50px;
+}
+
+.memory-btns button:hover {
+    background-color: var(--color-secondary);
+}
+
+.memory-btns button:disabled {
+    background-color: var(--color-border);
+    cursor: grabbing;
+}
+
+.memory-endgame {
+    display: flex;
+    justify-content: center;
+}
+
+@media (width > 750px) {
+ .memory-results {
+    /* outline: 2px solid blueviolet; */
+    flex-direction: row;
+ }   
+}

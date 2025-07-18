@@ -41,7 +41,6 @@ function App() {
 
   return (
     <>
-      <h1>Juego de memoria</h1>      
       <MemoryCardBoard optionsText={optionsMemory} />
     </>
   )

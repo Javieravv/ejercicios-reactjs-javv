@@ -42,6 +42,7 @@ export const initStateMemoryGame = (arrayData: itemOptionMemory[]): itemOptionMe
                 if (arrayDataMemoryGame[i].text === '' && cont === indexOption) {
                     arrayDataMemoryGame[i].text = arrayData[j].text
                     arrayDataMemoryGame[i].isSelected = false
+                    arrayDataMemoryGame[i].isCardPaired = false
                     totOptions = totOptions - 1
                     break
                 }
