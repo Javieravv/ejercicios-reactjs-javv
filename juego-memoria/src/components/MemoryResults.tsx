@@ -1,14 +1,18 @@
 // Este componente muestra los resultados del juego
 import './css/memoryresults.css'
+import type { NewGameParams } from './hooks/UseMemoryCardGame';
+import MemoryActions from './MemoryActions';
 
 interface MemoryResultsProps {
     totalCorrect: number;
     totalErrors: number;
     initMemoryGame: boolean;
     setInitMemoryGame: React.Dispatch<React.SetStateAction<boolean>>;
-    handleNewGame: () => void;
+    handleNewGame: (params: NewGameParams) => void;
     lenghtOptions: number;
     viewOptions: () => void;
+    setTimeGameSeconds: React.Dispatch<React.SetStateAction<number>>;
+    setTimeGameMinutes: React.Dispatch<React.SetStateAction<number>>
 }
 
 const MemoryResults = ({
@@ -18,7 +22,9 @@ const MemoryResults = ({
     setInitMemoryGame,
     handleNewGame,
     lenghtOptions,
-    viewOptions
+    viewOptions,
+    setTimeGameSeconds,
+    setTimeGameMinutes
 }: MemoryResultsProps) => {
     return (
         <div className="memory-results">
@@ -32,28 +38,17 @@ const MemoryResults = ({
                     <h3>{totalErrors}</h3>
                 </div>
             </div>
-            <div className="memory-btns">
-                <button
-                    className="btn-initGame"
-                    disabled={!initMemoryGame}
-                    onClick={() => {
-                        setInitMemoryGame(false)
-                        viewOptions()
-                    }}
-                >
-                    Iniciar
-                </button>
-                <button
-                    className="btn-newGame"
-                    onClick={() => handleNewGame()}
-                    disabled={totalCorrect !== lenghtOptions}
-                >Nuevo</button>
-                <button
-                    className="btn-reset"
-                    onClick={() => handleNewGame()}
-                    disabled={totalCorrect === lenghtOptions}
-                >Reiniciar</button>
-            </div>
+            {/* Mostramos la botonera para las opcionesMemoryActions */}
+            <MemoryActions
+                handleNewGame={handleNewGame}
+                initMemoryGame={initMemoryGame}
+                lenghtOptions={lenghtOptions}
+                setInitMemoryGame={setInitMemoryGame}
+                setTimeGameMinutes={setTimeGameMinutes}
+                setTimeGameSeconds={setTimeGameSeconds}
+                totalCorrect={totalCorrect}
+                viewOptions={viewOptions}
+            />
         </div>
     )
 }

@@ -7,6 +7,9 @@ import { useMemoryCardGame } from "./hooks/UseMemoryCardGame";
 import { obtenerCombinacionEquilibrada } from '../utils/utilsmemorygame';
 import type { itemOptionMemory } from "../App";
 import './css/memorycardborad.css'
+import { useStopWatch } from "./hooks/UseStopWatch";
+import { useMemoryDialog } from "./hooks/UseMemoryDialog";
+import { useNewGame } from "./hooks/UseNewGame";
 
 // Componente principal para el tablero
 interface MemoryCardBoardProps {
@@ -18,18 +21,27 @@ const MemoryCardBoard = ({
 }: MemoryCardBoardProps) => {
 
    const {
-      optiosMemoryGame, //setOptiosMemoryGame,
-      totalCorrect, //setTotalCorrect,
-      totalErrors, //setTotalErrors,
+      optionsMemoryGame, setoptionsMemoryGame, 
+      totalCorrect, setTotalCorrect,
+      totalErrors,  setTotalErrors,
       initMemoryGame, setInitMemoryGame,
-      timeGameSeconds, setTimeGameSeconds,
-      timeGameMinutes, setTimeGameMinutes,
-      handleClickCard, handleNewGame, dialogRef, viewOptions
+      handleClickCard, 
+      // handleNewGame, 
+      // dialogRef, 
+      // viewOptions
    } = useMemoryCardGame({ optionsText })
+
+   const {timeGameSeconds, setTimeGameSeconds,timeGameMinutes, setTimeGameMinutes} = useStopWatch()
    const [cols, rows] = obtenerCombinacionEquilibrada(optionsText.length * 2) ?? [4, 4]
    const gridConfig = useResponsiveConfigGrid({ cols, rows, mobileBreakpoint: 600 })
-
-   console.log(initMemoryGame)
+   const { dialogRef } = useMemoryDialog({totalCorrect, optionsTextLength: optionsText.length})
+   const { handleNewGame, viewOptions } = useNewGame({
+      setoptionsMemoryGame,
+      setTotalCorrect,
+      setTotalErrors,
+      setInitMemoryGame,
+      optionsText
+   })
 
    return (
       <>
@@ -56,10 +68,10 @@ const MemoryCardBoard = ({
                style={gridConfig}
             >
                {
-                  optiosMemoryGame.map((option, index) => {
+                  optionsMemoryGame.map((option, index) => {
                      return (
                         <CardMemory
-                           key={index} item={option}
+                           key={`option.text-${index}`} item={option}
                            onClickCard={() => handleClickCard(index)}
                         />)
                   })
@@ -74,6 +86,8 @@ const MemoryCardBoard = ({
                handleNewGame={handleNewGame}
                lenghtOptions={optionsText.length}
                viewOptions={viewOptions}
+               setTimeGameSeconds={setTimeGameSeconds}
+               setTimeGameMinutes={setTimeGameMinutes}
             />
             {/* Cuadro de diálogo final, cuando el juego acaba */}
             <dialog ref={dialogRef}>

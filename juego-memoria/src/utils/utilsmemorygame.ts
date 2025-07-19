@@ -21,34 +21,42 @@ export const obtenerCombinacionEquilibrada = (n: number): [number, number] | nul
 }
 
 // Devuelve un arreglo en donde se distribuyen aleatoriamente
-// valores de otro arreglo.
-// Los valores del arreglo1 se colocan dos veces en el arreglo 2
-
+// los items del juego.
 export const initStateMemoryGame = (arrayData: itemOptionMemory[]): itemOptionMemory[] => {
-    const arrayDataMemoryGame: itemOptionMemory[] = Array(arrayData.length * 2)
-        .fill(null)
-        .map(() => ({ text: '', isSelected: false, isCardPaired: false }));
+    // Barajamos las opciones usando sort, y luego le agregamos los datos para isSlecte
+    // isSelected e isCardPaired ya vienen en false
+    const suffledArrayData = [...arrayData, ...arrayData]
+        .sort(() => Math.random() - 0.5)
 
-    let totOptions = arrayDataMemoryGame.length
-    for (let j = 0; j < arrayData.length; j++) {
-        let totApariciones = 1
-        while (totApariciones <= 2) {
-            const indexOption = Math.floor(Math.random() * totOptions)
-            let cont = 0 // Cuenta las casillas vacías
-            for (let i = 0; i < arrayDataMemoryGame.length; i++) {
-                if (arrayDataMemoryGame[i].text === '' && cont !== indexOption) {
-                    cont = cont + 1
-                }
-                if (arrayDataMemoryGame[i].text === '' && cont === indexOption) {
-                    arrayDataMemoryGame[i].text = arrayData[j].text
-                    arrayDataMemoryGame[i].isSelected = false
-                    arrayDataMemoryGame[i].isCardPaired = false
-                    totOptions = totOptions - 1
-                    break
-                }
-            }
-            totApariciones = totApariciones + 1
-        }
-    }
-    return arrayDataMemoryGame
+    return suffledArrayData
 }
+
+// Es la anterior función que permitía distribuir las imágenes
+// const OldinitStateMemoryGame = (arrayData: itemOptionMemory[]): itemOptionMemory[] => {
+//     const arrayDataMemoryGame: itemOptionMemory[] = Array(arrayData.length * 2)
+//         .fill(null)
+//         .map(() => ({ text: '', isSelected: false, isCardPaired: false }));
+
+//     let totOptions = arrayDataMemoryGame.length
+//     for (let j = 0; j < arrayData.length; j++) {
+//         let totApariciones = 1
+//         while (totApariciones <= 2) {
+//             const indexOption = Math.floor(Math.random() * totOptions)
+//             let cont = 0 // Cuenta las casillas vacías
+//             for (let i = 0; i < arrayDataMemoryGame.length; i++) {
+//                 if (arrayDataMemoryGame[i].text === '' && cont !== indexOption) {
+//                     cont = cont + 1
+//                 }
+//                 if (arrayDataMemoryGame[i].text === '' && cont === indexOption) {
+//                     arrayDataMemoryGame[i].text = arrayData[j].text
+//                     arrayDataMemoryGame[i].isSelected = false
+//                     arrayDataMemoryGame[i].isCardPaired = false
+//                     totOptions = totOptions - 1
+//                     break
+//                 }
+//             }
+//             totApariciones = totApariciones + 1
+//         }
+//     }
+//     return arrayDataMemoryGame
+// }

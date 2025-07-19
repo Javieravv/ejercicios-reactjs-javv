@@ -16,8 +16,17 @@ const CardMemory = ({
 }: CardMemoryProps) => {
    // const [isCardVisible, setIsCardVisible] = useState(false)
    return (
-      <div className="cardmemory-container"
+      <div 
+         className="cardmemory-container"
          onClick={() => onClickCard()}
+         onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+               e.preventDefault()
+               onClickCard()
+            }
+         }}
+         role='button'
+         tabIndex={0}
       >
          <div className={`card-memory ${!item.isSelected ? 'card-memory_visible' : 'card-memory_hidem'}`}>
             <p></p>

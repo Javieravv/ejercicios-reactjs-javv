@@ -1,11 +1,16 @@
 // Hook para manejar el componente
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect,  useState } from "react"
 import type { itemOptionMemory } from "../../App"
 import { initStateMemoryGame } from "../../utils/utilsmemorygame"
 
 type UseMemoryCardGameParams = {
     optionsText: itemOptionMemory[] // Deberá ser optionsNumber por 2
+}
+
+export type NewGameParams = {
+    setTimeGameSeconds: React.Dispatch<React.SetStateAction<number>>;
+    setTimeGameMinutes: React.Dispatch<React.SetStateAction<number>>;
 }
 
 interface CardPaired {
@@ -16,18 +21,15 @@ interface CardPaired {
 export const useMemoryCardGame = ({
     optionsText
 }: UseMemoryCardGameParams) => {
-    const [optiosMemoryGame, setOptiosMemoryGame] = useState<itemOptionMemory[]>([])
+    const [optionsMemoryGame, setoptionsMemoryGame] = useState<itemOptionMemory[]>([])
     const [cardsPaired, setCardsPaired] = useState<CardPaired[]>([{ index: -1, text: "" }, { index: -1, text: "" }])
     const [clicksCards, setclicksCards] = useState<number>(0) // Controla el número de clicks
     const [totalCorrect, setTotalCorrect] = useState<number>(0)
     const [totalErrors, setTotalErrors] = useState<number>(0)
     const [initMemoryGame, setInitMemoryGame] = useState<boolean>(true)
-    const [timeGameSeconds, setTimeGameSeconds] = useState(0)
-    const [timeGameMinutes, setTimeGameMinutes] = useState(0)
-    const dialogRef = useRef<HTMLDialogElement>(null);
 
     useEffect(() => {
-        setOptiosMemoryGame(initStateMemoryGame(optionsText));
+        setoptionsMemoryGame(initStateMemoryGame(optionsText));
     }, [optionsText]);
 
 
@@ -36,18 +38,18 @@ export const useMemoryCardGame = ({
         // Si el juego no ha iniciado, retornamos.
         if (initMemoryGame) return
         // Si ya está marcada la casilla retornamos
-        if (optiosMemoryGame[i].isSelected) return // Si ya fue encontrada, no hacemos nada
+        if (optionsMemoryGame[i].isSelected || optionsMemoryGame[i].isCardPaired) return // Si ya fue encontrada o emparejada, no hacemos nada
 
         // Si el índice de clicks es 0, pasamos isSelected a false
         if (clicksCards === 0) {
-            setOptiosMemoryGame((prev) =>
+            setoptionsMemoryGame((prev) =>
                 prev.map((item) =>
-                    (!item.isCardPaired && !item.isCardPaired) ? { ...item, isSelected: false } : item
+                    (!item.isCardPaired) ? { ...item, isSelected: false } : item
                 )
             );
         }
 
-        setOptiosMemoryGame((prev) =>
+        setoptionsMemoryGame((prev) =>
             prev.map((item, index) =>
                 (index === i && !item.isCardPaired) ? { ...item, isSelected: !item.isSelected } : item
             )
@@ -59,7 +61,7 @@ export const useMemoryCardGame = ({
 
         setCardsPaired((prev) => {
             const cardsPairedTemp = clickTemporal === 0 ? [{ index: -1, text: "" }, { index: -1, text: "" }] : prev
-            cardsPairedTemp[clickTemporal].text = optiosMemoryGame[i].text
+            cardsPairedTemp[clickTemporal].text = optionsMemoryGame[i].text
             cardsPairedTemp[clickTemporal].index = i
             return cardsPairedTemp
         })
@@ -70,7 +72,7 @@ export const useMemoryCardGame = ({
     useEffect(() => {
         let timeCardOut: ReturnType<typeof setTimeout> | undefined;
         if (cardsPaired[0].text !== '' && (cardsPaired[0].text === cardsPaired[1].text)) {
-            setOptiosMemoryGame((prev) =>
+            setoptionsMemoryGame((prev) =>
                 prev.map((item, index) =>
                     (index === cardsPaired[0].index || index === cardsPaired[1].index)
                         ? { ...item, isCardPaired: true, isSelected: true }
@@ -82,7 +84,7 @@ export const useMemoryCardGame = ({
             if (cardsPaired[0].text === '' || cardsPaired[1].text === '') return
             // Esperamos un tiempo y ocultamos las opciones
             timeCardOut = setTimeout(() => {
-                setOptiosMemoryGame((prev) =>
+                setoptionsMemoryGame((prev) =>
                     prev.map((item) =>
                         (!item.isCardPaired) ? { ...item, isSelected: false } : item
                     )
@@ -90,56 +92,16 @@ export const useMemoryCardGame = ({
                 setTotalErrors((prev) => prev + 1)
             }, 500);
         }
-
         return () => clearTimeout(timeCardOut)
-
     }, [cardsPaired, clicksCards])
-
-    // Mostramos el cuadro de diálogo cuando el juego acabe
-    useEffect(() => {
-        if (totalCorrect === optionsText.length && dialogRef.current) {
-            dialogRef.current.showModal();
-        }
-    }, [totalCorrect, optionsText]);
-
-    // Mostramos las opciones y las ocultamos luego de un pequeño tiempo
-    const viewOptions = () => {
-        // Mostramos por un momento las letras
-        setOptiosMemoryGame((prev) =>
-            prev.map((item) => {
-                return { ...item, isSelected: true }
-            })
-        );
-
-        // Ocultamos las opciones luego de un tiempo
-        setTimeout(() => {
-            console.log('Ocultamos...')
-            setOptiosMemoryGame((prev) =>
-                prev.map((item) => {
-                    return { ...item, isSelected: false }
-                }));
-        }, 1800);
-    }
-
-    // Iniciamos nuevo juego
-    const handleNewGame = () => {
-        setOptiosMemoryGame(initStateMemoryGame(optionsText))
-        setTotalCorrect(0)
-        setTotalErrors(0)
-        setTimeGameMinutes(0)
-        setTimeGameSeconds(0)
-        setInitMemoryGame(true)
-    }
-
+    
     return {
-        optiosMemoryGame, setOptiosMemoryGame,
+        optionsMemoryGame, setoptionsMemoryGame,
         cardsPaired, setCardsPaired,
         clicksCards, setclicksCards,
         totalCorrect, setTotalCorrect,
         totalErrors, setTotalErrors,
         initMemoryGame, setInitMemoryGame,
-        timeGameSeconds, setTimeGameSeconds,
-        timeGameMinutes, setTimeGameMinutes,
-        handleClickCard, handleNewGame, dialogRef, viewOptions
+        handleClickCard, 
     }
 }

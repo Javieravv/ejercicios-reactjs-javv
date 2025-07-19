@@ -14,6 +14,10 @@
     overflow: hidden;
 }
 
+.cardmemory-container:focus {
+    outline: 2px solid var(--color-secondary);
+}
+
 .card-memory {
     display: flex;
     height: 100%;
